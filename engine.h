@@ -4,7 +4,6 @@
 #include <QCryptographicHash>
 
 
-
 class Engine
 {
 public:

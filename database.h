@@ -10,6 +10,7 @@
 class Database
 {
 public:
+
     bool connectToDatabase();
     bool findInDatabase(const QString &md5, const QString &sha1, const QString &sha256);
     bool findInDatabase(const QString &data);

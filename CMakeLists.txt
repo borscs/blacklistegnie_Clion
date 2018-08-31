@@ -5,7 +5,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-
 find_package(Qt5Core REQUIRED HINTS home/borscs/Qt/5.11.0/gcc_64)
 find_package(Qt5Sql REQUIRED HINTS home/borscs/Qt/5.11.0/gcc_64)
 

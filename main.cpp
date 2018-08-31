@@ -1,8 +1,6 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QCommandLineParser>
-#include <QCryptographicHash>
 #include <QFileInfo>
-
 
 #include "handler.h"
 
@@ -13,7 +11,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion("1.1.0");
 
     Handler handler;
-
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::translate("main", "Given a file or folder, the application checks whether it was compromised or not."));
@@ -56,5 +53,4 @@ int main(int argc, char *argv[])
     }
 
     parser.showHelp();
-
 }

@@ -1,16 +1,14 @@
 #include "handler.h"
 #include "utils.h"
-#include "engine.h"
 #include "jsonfu.h"
 
 #include <QtDebug>
 #include <QFileInfo>
 
-Engine engine;
-Utils utils;
+Utils utils; // global variables are not so welcommed put it in the class as a member variable
 JsonFu jsonfu;
 
-enum class returnValues {
+enum class returnValues { // enum class are also classes handle that way as normal classes
     Clear,
     Threat,
     Error = -1

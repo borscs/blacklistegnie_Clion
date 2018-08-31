@@ -1,17 +1,16 @@
 #include "database.h"
 
+// constructor that call connectToDatabase()
+// if it succeeded call an init() function
+// init will run a query with some default data
+
 bool Database::connectToDatabase()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     QString path = QDir::currentPath() + "/Database.db";
     db.setDatabaseName(path);
 
-    if(!db.open())
-    {
-        return false;
-    }
-
-    return true;
+   return db.open();
 }
 
 bool Database::findInDatabase(const QString &md5, const QString &sha1, const QString &sha256)
@@ -22,15 +21,14 @@ bool Database::findInDatabase(const QString &md5, const QString &sha1, const QSt
     sqlQuery.bindValue(":sha1Var", sha1);
     sqlQuery.bindValue(":sha256Var", sha256);
 
-    if(sqlQuery.exec() && sqlQuery.next())
-    {
+    if(sqlQuery.exec() && sqlQuery.next()) {
         return true;
     }
 
     return false;
 }
 
-bool Database::findInDatabase(const QString &data)
+bool Database::findInDatabase(const QString &data) // call the param to hash
 {
     QSqlQuery sqlQuery;
 
