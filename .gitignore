@@ -1,0 +1,12 @@
+*.pro
+.qmake.stash
+*.pro.user 
+Makefile
+
+
+*.o
+*.debug
+.idea/
+cmake-build-debug/
+
+*.autosave

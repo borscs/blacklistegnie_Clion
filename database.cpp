@@ -1,0 +1,58 @@
+#include "database.h"
+
+bool Database::connectToDatabase()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    QString path = QDir::currentPath() + "/Database.db";
+    db.setDatabaseName(path);
+
+    if(!db.open())
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool Database::findInDatabase(const QString &md5, const QString &sha1, const QString &sha256)
+{
+    QSqlQuery sqlQuery;
+    sqlQuery.prepare("SELECT md5, sha1, sha256 FROM hashTable WHERE md5 = (:md5Var) OR sha1 = (:sha1Var) OR sha256 = (:sha256Var)");
+    sqlQuery.bindValue(":md5Var", md5);
+    sqlQuery.bindValue(":sha1Var", sha1);
+    sqlQuery.bindValue(":sha256Var", sha256);
+
+    if(sqlQuery.exec() && sqlQuery.next())
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool Database::findInDatabase(const QString &data)
+{
+    QSqlQuery sqlQuery;
+
+    switch (data.length())
+    {
+        case 32:
+            sqlQuery.prepare("SELECT md5 FROM hashTable WHERE md5 = (:md5Var)");
+            sqlQuery.bindValue(":md5Var", data);
+            break;
+        case 40:
+            sqlQuery.prepare("SELECT sha1 FROM hashTable WHERE sha1 = (:sha1Var)");
+            sqlQuery.bindValue(":sha1Var", data);
+            break;
+        case 64:
+            sqlQuery.prepare("SELECT sha256 FROM hashTable WHERE sha256 = (:sha256Var)");
+            sqlQuery.bindValue(":sha256Var", data);
+            break;
+    }
+
+    if(sqlQuery.exec() && sqlQuery.next()) {
+        return true;
+    }
+
+    return false;
+}
