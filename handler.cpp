@@ -5,8 +5,8 @@
 #include <QtDebug>
 #include <QFileInfo>
 
-Utils utils; // global variables are not so welcommed put it in the class as a member variable
-JsonFu jsonfu;
+// global variables are not so welcommed put it in the class as a member variable
+
 
 enum class returnValues { // enum class are also classes handle that way as normal classes
     Clear,

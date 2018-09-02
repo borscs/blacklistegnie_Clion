@@ -1,6 +1,8 @@
 #pragma once
 
 #include "engine.h"
+#include "utils.h"
+#include "jsonfu.h"
 
 #include <QString>
 
@@ -16,6 +18,8 @@ public:
 
 private:
     Engine engine;
+    JsonFu jsonfu;
+    Utils utils;
 };
 
 
