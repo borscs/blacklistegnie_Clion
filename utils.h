@@ -2,6 +2,7 @@
 
 #include <QCoreApplication>
 #include <QTextStream>
+#include <QDirIterator>
 
 
 namespace  utils
@@ -17,6 +18,26 @@ class Utils
 {
 public:
 
-    QTextStream &qStdOut();
-    QStringList fileInFolder(const QString &path);
+    QTextStream &qStdOut(){
+
+
+        QTextStream &Utils::qStdOut()
+        {
+            static QTextStream textStream(stdout);
+            return textStream;
+        }
+
+    }
+    QStringList fileInFolder(const QString &path){
+        QStringList results;
+        QDirIterator it(path);
+        while(it.hasNext()) {
+            it.next();
+            if(QFileInfo(it.filePath()).isFile()) {
+                results << it.filePath();
+            }
+        }
+
+        return results;
+    }
 };
