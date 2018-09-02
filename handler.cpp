@@ -8,11 +8,6 @@
 // global variables are not so welcommed put it in the class as a member variable
 
 
-enum class returnValues { // enum class are also classes handle that way as normal classes
-    Clear,
-    Threat,
-    Error = -1
-};
 
 Handler::Handler()
 {
@@ -22,21 +17,21 @@ Handler::Handler()
 void Handler::scan(QString path)
 {
     switch (engine.fileScan(path)) {
-        case static_cast<int>(returnValues::Clear):
+        case static_cast<int>(utils::Verdict ::Clear):
             jsonfu.clearJSON();
             jsonfu.addToJSON("file_name", path);
             jsonfu.addToJSON("verdict", "No threat detected");
             jsonfu.createNode();
             utils.qStdOut() << jsonfu.createJSON().toJson(QJsonDocument::Indented);
             break;
-        case static_cast<int>(returnValues::Threat):
+        case static_cast<int>(utils::Verdict ::Threat):
             jsonfu.clearJSON();
             jsonfu.addToJSON("file_name", path);
             jsonfu.addToJSON("verdict", "blocked");
             jsonfu.createNode();
             utils.qStdOut() << jsonfu.createJSON().toJson(QJsonDocument::Indented);
             break;
-        case static_cast<int>(returnValues::Error):
+        case static_cast<int>(utils::Verdict ::Error):
             jsonfu.clearJSON();
             jsonfu.addToJSON("file_name", path);
             jsonfu.addToJSON("error", "file not found!");
@@ -93,17 +88,17 @@ bool Handler::scanFolder(QString path)
     {
         switch (engine.fileScan(result))
         {
-            case static_cast<int>(returnValues::Clear):
+            case static_cast<int>(utils::Verdict::Clear):
                 jsonfu.addToJSON("file_name", result);
                 jsonfu.addToJSON("verdict", "no threat detected");
                 jsonfu.createNode();
                 break;
-            case static_cast<int>(returnValues::Threat):
+            case static_cast<int>(utils::Verdict::Threat):
                 jsonfu.addToJSON("file_name", result);
                 jsonfu.addToJSON("verdict", "blocked");
                 jsonfu.createNode();
                 break;
-            case static_cast<int>(returnValues::Error):
+            case static_cast<int>(utils::Verdict::Error):
                 jsonfu.addToJSON("file_name", result);
                 jsonfu.addToJSON("error", "file not found!");
                 jsonfu.createNode();

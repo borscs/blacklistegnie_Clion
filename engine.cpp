@@ -16,20 +16,20 @@ bool Engine::init()
 }
 
 
-utils::Verdict Engine::fileScan(QString path) // return with enums
+qint16 Engine::fileScan(QString path) // return with enums
 {
     if(!QFileInfo::exists(path))
     {
-        return utils::Verdict::Error;
+        return static_cast<qint16>(utils::Verdict::Error);
     }
 
     if(database.findInDatabase(hashes(path)["md5"], hashes(path)["sha1"], hashes(path)["sha256"]))
     {
-        return static_cast<qint16>(returnValues::Threat);
+        return static_cast<qint16>(utils::Verdict::Threat);
     }
     else
     {
-        return static_cast<qint16>(returnValues::Clear);
+        return static_cast<qint16>(utils::Verdict ::Clear);
     }
 
 }
@@ -43,11 +43,9 @@ bool Engine::lookup(QString hash)
 QString Engine::fileHashGenerate(QString path, QCryptographicHash::Algorithm hashAlgoritm)
 {
     QFile file(path);
-    if(file.open(QFile::ReadOnly))
-    {
+    if(file.open(QFile::ReadOnly)) {
         QCryptographicHash hash(hashAlgoritm);
-        if(hash.addData(&file))
-        {
+        if(hash.addData(&file)) {
             return hash.result().toHex();
         }
     }

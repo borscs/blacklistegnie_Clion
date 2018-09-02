@@ -18,17 +18,14 @@ class Utils
 {
 public:
 
-    QTextStream &qStdOut(){
+    QTextStream &qStdOut() {
 
-
-        QTextStream &Utils::qStdOut()
-        {
             static QTextStream textStream(stdout);
             return textStream;
-        }
+        };
 
-    }
-    QStringList fileInFolder(const QString &path){
+
+    QStringList fileInFolder(const QString &path) {
         QStringList results;
         QDirIterator it(path);
         while(it.hasNext()) {
@@ -39,5 +36,5 @@ public:
         }
 
         return results;
-    }
+    };
 };
