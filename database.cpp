@@ -28,23 +28,23 @@ bool Database::findInDatabase(const QString &md5, const QString &sha1, const QSt
     return false;
 }
 
-bool Database::findInDatabase(const QString &data) // call the param to hash
+bool Database::findInDatabase(const QString &hash) // call the param to hash
 {
     QSqlQuery sqlQuery;
 
-    switch (data.length())
+    switch (hash.length())
     {
         case 32:
             sqlQuery.prepare("SELECT md5 FROM hashTable WHERE md5 = (:md5Var)");
-            sqlQuery.bindValue(":md5Var", data);
+            sqlQuery.bindValue(":md5Var", hash);
             break;
         case 40:
             sqlQuery.prepare("SELECT sha1 FROM hashTable WHERE sha1 = (:sha1Var)");
-            sqlQuery.bindValue(":sha1Var", data);
+            sqlQuery.bindValue(":sha1Var", hash);
             break;
         case 64:
             sqlQuery.prepare("SELECT sha256 FROM hashTable WHERE sha256 = (:sha256Var)");
-            sqlQuery.bindValue(":sha256Var", data);
+            sqlQuery.bindValue(":sha256Var", hash);
             break;
     }
 

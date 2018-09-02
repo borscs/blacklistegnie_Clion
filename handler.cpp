@@ -5,8 +5,6 @@
 #include <QtDebug>
 #include <QFileInfo>
 
-// global variables are not so welcommed put it in the class as a member variable
-
 
 
 Handler::Handler()
@@ -47,14 +45,12 @@ void Handler::lookup(QString hash)
 {
     jsonfu.clearJSON();
 
-    if(engine.lookup(hash))
-    {
+    if(engine.lookup(hash)) {
         jsonfu.addToJSON("hash", hash);
         jsonfu.addToJSON("verdict", "blocked");
         jsonfu.createNode();
     }
-    else
-    {
+    else {
         jsonfu.addToJSON("hash", hash);
         jsonfu.addToJSON("verdict", "No threat detected");
         jsonfu.createNode();

@@ -3,6 +3,7 @@
 #include <QtCore/QCoreApplication>
 #include <QCryptographicHash>
 
+#include "database.h"
 
 class Engine
 {
@@ -13,4 +14,6 @@ public:
     QMap<QString, QString> hashes(QString path);
     QString fileHashGenerate(QString path, QCryptographicHash::Algorithm algorithm);
 
+private:
+    Database database;
 };
