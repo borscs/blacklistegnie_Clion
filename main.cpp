@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("Blacklist Engine");
     QCoreApplication::setApplicationVersion("1.1.0");
 
-    Handler handler;
+    engineHandler handler;
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::translate("main", "Given a file or folder, the application checks whether it was compromised or not."));

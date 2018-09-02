@@ -6,10 +6,10 @@
 
 #include <QString>
 
-class Handler
+class engineHandler
 {
 public:
-    Handler();
+    engineHandler();
 
     void scan(QString path);
     void lookup(QString hash);

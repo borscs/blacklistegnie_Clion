@@ -7,12 +7,12 @@
 
 
 
-Handler::Handler()
+engineHandler::engineHandler()
 {
    engine.init();
 }
 
-void Handler::scan(QString path)
+void engineHandler::scan(QString path)
 {
     switch (engine.fileScan(path)) {
         case static_cast<int>(utils::Verdict ::Clear):
@@ -41,7 +41,7 @@ void Handler::scan(QString path)
     }
 }
 
-void Handler::lookup(QString hash)
+void engineHandler::lookup(QString hash)
 {
     jsonfu.clearJSON();
 
@@ -59,7 +59,7 @@ void Handler::lookup(QString hash)
     utils.qStdOut() << jsonfu.createJSON().toJson(QJsonDocument::Indented);
 }
 
-void Handler::generate(QString path)
+void engineHandler::generate(QString path)
 {
     jsonfu.clearJSON();
     jsonfu.addToJSON("file_name", path);
@@ -70,7 +70,7 @@ void Handler::generate(QString path)
     utils.qStdOut() << jsonfu.createJSON().toJson(QJsonDocument::Indented);
 }
 
-bool Handler::scanFolder(QString path)
+bool engineHandler::scanFolder(QString path)
 {
     if(!QFileInfo::exists(path)) {
         utils.qStdOut() << "Given folder not found!";
