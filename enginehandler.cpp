@@ -1,18 +1,16 @@
-#include "handler.h"
+#include "enginehandler.h"
 #include "utils.h"
 #include "jsonfu.h"
 
 #include <QtDebug>
 #include <QFileInfo>
 
-
-
-engineHandler::engineHandler()
+EngineHandler::EngineHandler()
 {
    engine.init();
 }
 
-void engineHandler::scan(QString path)
+void EngineHandler::scan(QString path)
 {
     switch (engine.fileScan(path)) {
         case static_cast<int>(utils::Verdict ::Clear):
@@ -41,7 +39,7 @@ void engineHandler::scan(QString path)
     }
 }
 
-void engineHandler::lookup(QString hash)
+void EngineHandler::lookup(QString hash)
 {
     jsonfu.clearJSON();
 
@@ -59,7 +57,7 @@ void engineHandler::lookup(QString hash)
     utils.qStdOut() << jsonfu.createJSON().toJson(QJsonDocument::Indented);
 }
 
-void engineHandler::generate(QString path)
+void EngineHandler::generate(QString path)
 {
     jsonfu.clearJSON();
     jsonfu.addToJSON("file_name", path);
@@ -70,7 +68,7 @@ void engineHandler::generate(QString path)
     utils.qStdOut() << jsonfu.createJSON().toJson(QJsonDocument::Indented);
 }
 
-bool engineHandler::scanFolder(QString path)
+bool EngineHandler::scanFolder(QString path)
 {
     if(!QFileInfo::exists(path)) {
         utils.qStdOut() << "Given folder not found!";
