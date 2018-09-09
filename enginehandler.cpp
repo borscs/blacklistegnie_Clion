@@ -1,6 +1,6 @@
 #include "enginehandler.h"
 #include "utils.h"
-#include "jsonfu.h"
+#include "jsonhelper.h"
 
 #include <QtDebug>
 #include <QFileInfo>

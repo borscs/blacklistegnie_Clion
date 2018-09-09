@@ -2,7 +2,7 @@
 
 #include "engine.h"
 #include "utils.h"
-#include "jsonfu.h"
+#include "jsonhelper.h"
 
 #include <QString>
 
@@ -18,6 +18,6 @@ public:
 
 private:
 	Engine engine;
-	JsonFu jsonfu;
+	JsonHelper jsonfu;
 	utils::Utils utils;
 };
