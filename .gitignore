@@ -10,3 +10,5 @@ Makefile
 cmake-build-debug/
 
 *.autosave
+
+*build/
