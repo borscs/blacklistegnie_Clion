@@ -7,7 +7,7 @@
 bool Database::connectToDatabase()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    QString path = QDir::currentPath() + "/Database.db";
+    QString path = QDir::currentPath() + "/DatabaseDb.sqlite3";
     db.setDatabaseName(path);
 
    return db.open();
@@ -16,7 +16,7 @@ bool Database::connectToDatabase()
 bool Database::findInDatabase(const QString &md5, const QString &sha1, const QString &sha256)
 {
     QSqlQuery sqlQuery;
-    sqlQuery.prepare("SELECT md5, sha1, sha256 FROM hashTable WHERE md5 = (:md5Var) OR sha1 = (:sha1Var) OR sha256 = (:sha256Var)");
+    sqlQuery.prepare("SELECT md5, sha1, sha256 FROM HAshes WHERE md5 = (:md5Var) OR sha1 = (:sha1Var) OR sha256 = (:sha256Var)");
     sqlQuery.bindValue(":md5Var", md5);
     sqlQuery.bindValue(":sha1Var", sha1);
     sqlQuery.bindValue(":sha256Var", sha256);
