@@ -9,15 +9,15 @@ Database::Database()
 
 }
 
-
 bool Database::connectToDatabase()
 {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 	QString path = QDir::currentPath() + "/DatabaseDb.sqlite3";
 	db.setDatabaseName(path);
-	if(!db.open()) {
-		qDebug()<< "Faild to open database.";
-	}else {
+	if (!db.open()) {
+		qDebug() << "Faild to open database.";
+	}
+	else {
 		return db.open();
 	}
 
@@ -66,15 +66,17 @@ bool Database::findInDatabase(const QString &hash) // call the param to hash
 
 	return false;
 }
-void Database::addRecord(const QString &md5Path, const QString &sha1Path, const QString &sha265Path, const QString &name)
+void
+Database::addRecord(const QString &md5Path, const QString &sha1Path, const QString &sha265Path, const QString &name)
 {
-		QSqlQuery sqlQuery;
+	QSqlQuery sqlQuery;
 
-		sqlQuery.prepare("INSERT INTO Hashes (md5, sh1, sha256, Virus_Name) VALUES (:md5Path, :sh1Path, :sha256Path, :name)");
-		sqlQuery.bindValue(":md5", md5Path);
-		sqlQuery.bindValue(":sh1", sha1Path);
-		sqlQuery.bindValue(":sh256", sha265Path);
-		sqlQuery.exec();
+	sqlQuery
+		.prepare("INSERT INTO Hashes (md5, sh1, sha256, Virus_Name) VALUES (:md5Path, :sh1Path, :sha256Path, :name)");
+	sqlQuery.bindValue(":md5", md5Path);
+	sqlQuery.bindValue(":sh1", sha1Path);
+	sqlQuery.bindValue(":sh256", sha265Path);
+	sqlQuery.exec();
 //		if(sqlQuery.exec() && sqlQuery.next()){
 //			qDebug()<<"good";
 //		}else{

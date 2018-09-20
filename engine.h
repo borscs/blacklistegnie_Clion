@@ -13,7 +13,7 @@ public:
 	qint16 fileScan(QString path);
 	QMap<QString, QString> hashes(QString path);
 	QString fileHashGenerate(QString path, QCryptographicHash::Algorithm algorithm);
-	
+
 
 private:
 	Database database;

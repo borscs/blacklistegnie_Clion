@@ -30,8 +30,8 @@ bool Engine::lookup(QString hash)
 QString Engine::fileHashGenerate(QString path, QCryptographicHash::Algorithm hashAlgoritm)
 {
 	QFile file(path);
-		if (file.open(QFile::ReadOnly)) {
-			QCryptographicHash hash(hashAlgoritm);
+	if (file.open(QFile::ReadOnly)) {
+		QCryptographicHash hash(hashAlgoritm);
 		if (hash.addData(&file)) {
 			return hash.result().toHex();
 		}

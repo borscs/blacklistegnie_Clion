@@ -58,7 +58,7 @@ void engineHandler::lookup(QString hash)
 	utils.qStdOut() << jsonfu.createJSON().toJson(QJsonDocument::Indented);
 }
 
-void engineHandler:: generate(QString path)
+void engineHandler::generate(QString path)
 {
 	jsonfu.clearJSON();
 	jsonfu.addToJSON("file_name", path);
@@ -68,7 +68,10 @@ void engineHandler:: generate(QString path)
 	jsonfu.createNode();
 	utils.qStdOut() << jsonfu.createJSON().toJson(QJsonDocument::Indented);
 
-	database.addRecord(jsonfu.recordObject.value("md5").toString(), jsonfu.recordObject.value("sha1").toString(),jsonfu.recordObject.value("sha256").toString(), path);
+	database.addRecord(jsonfu.recordObject.value("md5").toString(),
+					   jsonfu.recordObject.value("sha1").toString(),
+					   jsonfu.recordObject.value("sha256").toString(), 
+					   path);
 }
 
 bool engineHandler::scanFolder(QString path)
