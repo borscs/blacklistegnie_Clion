@@ -15,8 +15,14 @@ bool Database::connectToDatabase()
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 	QString path = QDir::currentPath() + "/DatabaseDb.sqlite3";
 	db.setDatabaseName(path);
+	if(!db.open()) {
+		qDebug()<< "Faild to open database.";
+	}else {
+		return db.open();
+	}
 
-	return db.open();
+	return false;
+
 }
 
 bool Database::findInDatabase(const QString &md5, const QString &sha1, const QString &sha256)

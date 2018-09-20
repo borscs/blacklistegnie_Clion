@@ -9,17 +9,19 @@
 class engineHandler
 {
 public:
-    engineHandler();
+	engineHandler();
 
-    void scan(QString path);
-    void lookup(QString hash);
-    void generate(QString path);
-    bool scanFolder(QString path);
+	void scan(QString path);
+	void lookup(QString hash);
+	void generate(QString path);
+	bool scanFolder(QString path);
 
 private:
-    Engine engine;
-    JsonFu jsonfu;
-    Utils utils;
+	Engine engine;
+	JsonFu jsonfu;
+	Utils utils;
+	Database database;
+
 };
 
 

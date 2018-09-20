@@ -5,36 +5,39 @@
 #include <QDirIterator>
 
 
-namespace  utils
+namespace utils
 {
-    enum class Verdict {
-        Clear,
-        Threat,
-        Error = -1
-    };
+enum class Verdict
+{
+	Clear,
+	Threat,
+	Error = -1
+};
 }
 
 class Utils
 {
 public:
 
-    QTextStream &qStdOut() {
+	QTextStream &qStdOut()
+	{
 
-            static QTextStream textStream(stdout);
-            return textStream;
-        };
+		static QTextStream textStream(stdout);
+		return textStream;
+	};
 
 
-    QStringList fileInFolder(const QString &path) {
-        QStringList results;
-        QDirIterator it(path);
-        while(it.hasNext()) {
-            it.next();
-            if(QFileInfo(it.filePath()).isFile()) {
-                results << it.filePath();
-            }
-        }
+	QStringList fileInFolder(const QString &path)
+	{
+		QStringList results;
+		QDirIterator it(path);
+		while (it.hasNext()) {
+			it.next();
+			if (QFileInfo(it.filePath()).isFile()) {
+				results << it.filePath();
+			}
+		}
 
-        return results;
-    };
+		return results;
+	};
 };
