@@ -16,6 +16,7 @@ bool Database::connectToDatabase()
 	db.setDatabaseName(path);
 	if (!db.open()) {
 		qDebug() << "Faild to open database.";
+		init();
 	}
 	else {
 		return db.open();
@@ -82,5 +83,14 @@ Database::addRecord(const QString &md5Path, const QString &sha1Path, const QStri
 //		}else{
 //			qDebug()<<"not good";
 //		}
+
+}
+void Database::init()
+{
+	QSqlQuery query;
+	query.prepare("CREATE NOT EXISTS DatabaseDb.sqlite3(md5 TEXT, sh1 TEXT, sh256 TEXTT, Virus_name TEXT)");
+	if (!query.exec()) {
+		qDebug() << "Error creating table: " << query.lastError();
+	}
 
 }

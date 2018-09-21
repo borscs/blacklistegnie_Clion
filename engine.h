@@ -4,6 +4,7 @@
 #include <QCryptographicHash>
 
 #include "database.h"
+#include "utils.h"
 
 class Engine
 {
@@ -19,4 +20,5 @@ public:
 
 private:
 	Database database;
+	Utils utils;
 };

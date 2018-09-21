@@ -2,11 +2,6 @@
 #include "utils.h"
 #include "iostream"
 
-enum class returnValues { // this may be called Verdict and put it in the utils and do not duplicate code (handler has the same enum class
-	Clear,
-	Threat,
-	Error = -1
-};
 
 bool Engine::init()
 {

@@ -12,7 +12,7 @@ class Database
 public:
 
 	Database();
-
+    void init();
 	void addRecord(const QString &md5Path, const QString &sha1Path, const QString &sha265Path, const QString &name);
 	bool connectToDatabase();
 	bool findInDatabase(const QString &md5, const QString &sha1, const QString &sha256);
