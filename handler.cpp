@@ -5,7 +5,6 @@
 #include <QtDebug>
 #include <QFileInfo>
 
-
 engineHandler::engineHandler()
 {
 	engine.init();
@@ -68,7 +67,7 @@ void engineHandler::generate(QString path)
 	jsonfu.createNode();
 	utils.qStdOut() << jsonfu.createJSON().toJson(QJsonDocument::Indented);
 
-	database.addRecord(jsonfu.recordObject.value("md5").toString(),
+	engine.database.addRecord(jsonfu.recordObject.value("md5").toString(),
 					   jsonfu.recordObject.value("sha1").toString(),
 					   jsonfu.recordObject.value("sha256").toString(), 
 					   path);

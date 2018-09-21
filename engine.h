@@ -16,9 +16,6 @@ public:
 	QMap<QString, QString> hashes(QString path);
 	QString fileHashGenerate(QString path, QCryptographicHash::Algorithm algorithm);
 
-
-
-private:
+public:
 	Database database;
-	Utils utils;
 };

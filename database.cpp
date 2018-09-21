@@ -5,8 +5,9 @@
 
 Database::Database()
 {
-	connectToDatabase();
-
+	if(connectToDatabase()) {
+		init();
+	}
 }
 
 bool Database::connectToDatabase()
@@ -16,14 +17,10 @@ bool Database::connectToDatabase()
 	db.setDatabaseName(path);
 	if (!db.open()) {
 		qDebug() << "Faild to open database.";
-		init();
-	}
-	else {
-		return db.open();
+		return false;
 	}
 
-	return false;
-
+	return true;
 }
 
 bool Database::findInDatabase(const QString &md5, const QString &sha1, const QString &sha256)
@@ -35,11 +32,7 @@ bool Database::findInDatabase(const QString &md5, const QString &sha1, const QSt
 	sqlQuery.bindValue(":sha1Var", sha1);
 	sqlQuery.bindValue(":sha256Var", sha256);
 
-	if (sqlQuery.exec() && sqlQuery.next()) {
-		return true;
-	}
-
-	return false;
+	return (sqlQuery.exec() && sqlQuery.next());
 }
 
 bool Database::findInDatabase(const QString &hash) // call the param to hash
@@ -67,30 +60,30 @@ bool Database::findInDatabase(const QString &hash) // call the param to hash
 
 	return false;
 }
-void
-Database::addRecord(const QString &md5Path, const QString &sha1Path, const QString &sha265Path, const QString &name)
+void Database::addRecord(const QString &md5Path, const QString &sha1Path, const QString &sha265Path, const QString &name)
 {
 	QSqlQuery sqlQuery;
 
 	sqlQuery
-		.prepare("INSERT INTO Hashes (md5, sh1, sha256, Virus_Name) VALUES (:md5Path, :sh1Path, :sha256Path, :name)");
+		.prepare("INSERT INTO Hashes (md5, sha1, sha256, File_name) VALUES (:md5Path, :sh1Path, :sha256Path, :name)");
 	sqlQuery.bindValue(":md5", md5Path);
 	sqlQuery.bindValue(":sh1", sha1Path);
 	sqlQuery.bindValue(":sh256", sha265Path);
+	sqlQuery.bindValue(":name", name);
 	sqlQuery.exec();
-//		if(sqlQuery.exec() && sqlQuery.next()){
-//			qDebug()<<"good";
-//		}else{
-//			qDebug()<<"not good";
-//		}
 
+	if (!sqlQuery.exec()) {
+		qDebug() << "Error while inserting data into Hashes table";
+	}
 }
-void Database::init()
+
+bool Database::init()
 {
 	QSqlQuery query;
-	query.prepare("CREATE NOT EXISTS DatabaseDb.sqlite3(md5 TEXT, sh1 TEXT, sh256 TEXTT, Virus_name TEXT)");
+	query.prepare("CREATE TABLE IF NOT EXISTS Hashes(md5 TEXT, sha1 TEXT, sha256 TEXT, File_name TEXT)");
 	if (!query.exec()) {
 		qDebug() << "Error creating table: " << query.lastError();
+		return false;
 	}
-
+	return true;
 }

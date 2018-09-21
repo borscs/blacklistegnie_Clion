@@ -20,7 +20,6 @@ private:
 	Engine engine;
 	JsonFu jsonfu;
 	Utils utils;
-	Database database;
 
 };
 
